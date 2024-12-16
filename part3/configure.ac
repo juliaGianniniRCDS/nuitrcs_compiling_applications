@@ -36,34 +36,6 @@ AC_CONFIG_FILES([Makefile src/Makefile])
 ## Set the default prefix (otherwise it will be /usr/local which we can't generally write to)
 AC_PREFIX_DEFAULT([[`pwd`]])
 
-######## This is a convoluted/non-ideal to achieve a similar default behavior in this particular case ########
-### make a commit with this there and then another with it deleted just for posterity. 
-## Set the default bin directory where the executables in bin_PROGRAMS will 
-## be installed in upon running make install. 
-## As is explained by ./configure -h, the default is the /bin subdirectory 
-## of the default prefix which is /usr/local (which we can't write to)
-#AC_ARG_WITH([bindir],
-#    [AS_HELP_STRING([--with-bindir], [Set default binary installation directory (--with-bindir=<something>). We set it to default to `pwd`/bin.])],
-#    [bindir=$withval],
-#    [bindir=`pwd`/bin]
-#)
-## Pass this value of bindir to the Makefiles that get generated 
-## upon running configure 
-#AC_SUBST([bindir])
-
-## Do the same with docdir which defaults to <prefix=/usr/local>/share/doc
-## (again see output of ./configure -h)
-#AC_ARG_WITH([docdir],
-#    [AS_HELP_STRING([--with-docdir], [Set default documentation installation directory (--with-docdir=<something>). We set it to default to `pwd`/bin.])],
-#    [docdir=$withval],
-#    [docdir=`pwd`/bin]
-#)
-## Pass this value of docdir to the Makefiles that get generated 
-## upon running configure 
-#AC_SUBST([docdir])
-
-######## This is a convoluted/non-ideal to achieve a similar default behavior in this particular case ########
-
 ## Generate the output
 AC_OUTPUT
 
