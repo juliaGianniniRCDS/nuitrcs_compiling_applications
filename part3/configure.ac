@@ -22,6 +22,27 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 ## We can add more checks in this section
 
+## Add --with-gsl option to specify the location of libgsl
+AC_ARG_WITH([gsl],
+    AS_HELP_STRING([--with-gsl=DIR],
+                   [Specify the directory containing libgsl (gsl library)]),
+    [GSL_PATH=$withval],
+    [GSL_PATH=""])  # Default to empty if not specified
+
+## Update CPPFLAGS and LDFLAGS if GSL_PATH is provided
+if test -n "$GSL_PATH"; then
+    CPPFLAGS="$CPPFLAGS -I$GSL_PATH/include"
+    LDFLAGS="$LDFLAGS -L$GSL_PATH/lib"
+fi
+
+## Check for gsl for the random matrix program 
+AC_CHECK_LIB([gsl], [gsl_matrix_alloc], [LIBS="$LIBS -lgsl"], [AC_MSG_ERROR([GSL library gsl not found. Please specify --with-gsl=<path>])])
+
+## Pass variables to Makefile 
+AC_SUBST([CPPFLAGS])
+AC_SUBST([LDFLAGS])
+AC_SUBST([LIBS])
+
 ## Tell autoconf to generate configuration header files during the ./configure 
 ## script. Header files typically contain #define statements that make specific
 ## functions available to your code based on the results of further
