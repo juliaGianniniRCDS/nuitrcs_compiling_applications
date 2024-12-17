@@ -7,7 +7,7 @@
 ## The first parameter is project name
 ## second is version number
 ## third is bug report address
-AC_INIT([hello], [1.0])
+AC_INIT([hello_matrix], [1.0])
 
 ## Store the auxiliary build tools (e.g., install-sh, config.sub, config.guess)
 ## in this dir (build-aux)
